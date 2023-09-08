@@ -1,0 +1,30 @@
+﻿@addTagHelper*,Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model AspEx1.Models.CalculatorModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<form method="post" action="Calculator/Calculate">
+    <input asp-for="Y"  type="number" step="any" placeholder="Первое число" required>
+
+    <input asp-for="X"  type="number" step="any" placeholder="Второе число" required>
+
+    <select asp-for="Operator" >
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="/">/</option>
+        <option value="*">*</option>
+    </select>
+
+    <input type="submit" value="=">
+</form>
+@if (Model.Res!=0)
+{
+    <div>
+        <h2>Результат:</h2>
+        <p>@Model.Res</p>
+    </div>
+}

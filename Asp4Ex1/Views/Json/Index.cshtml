@@ -1,0 +1,55 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        <a asp-action="clientinfo">Test Controller Method</a>
+    </p>
+
+    <button id="button">JS Client</button>
+
+    <div id="clientContainer"></div>
+
+    <script>
+        let btn = document.querySelector("#button");
+        let xhr = new XMLHttpRequest();
+
+        btn.addEventListener("click", () => {
+            xhr.open("GET", "/json/clientinfo");
+            xhr.onload = () => {
+                let response = JSON.parse(xhr.response);
+
+                // Очищаем контейнер перед добавлением новых данных
+                let clientContainer = document.querySelector("#clientContainer");
+                clientContainer.innerHTML = "";
+
+                // Обрабатываем каждого клиента в списке
+                response.forEach(client => {
+                    // Создаем элемент для отображения информации о клиенте
+                    let clientDiv = document.createElement("div");
+                    clientDiv.innerHTML = `
+                                <h2>Клиент</h2>
+                                <p>Id: ${client.id}</p>
+                                <p>Login: ${client.login}</p>
+                                <p>Email: ${client.email}</p>
+                            `;
+
+                    // Добавляем созданный элемент в контейнер
+                    clientContainer.appendChild(clientDiv);
+                });
+            }
+            xhr.send();
+        })
+    </script>
+</body>
+</html>
+

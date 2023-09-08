@@ -1,0 +1,16 @@
+﻿@model List<AspNetCore3.Models.Model1>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+@foreach(var product in Model)
+    {
+    <p>Id: @product.Id;</p>
+    <p>Price: @product.Price;</p>
+    <p>Name :@product.Name;</p>
+    }
+
+
+
+
